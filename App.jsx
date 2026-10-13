@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Jobs from "./pages/Jobs";
-import Projects from "./pages/projects";
-import Marketplace from "./pages/Marketplace";
+import Login from "./Login.jsx";
+import Register from "./Register.jsx";
+import Dashboard from "./Dashboard.jsx";
+import Profile from "./Profile.jsx";
+import Jobs from "./Jobs.jsx";
+import Projects from "./projects.jsx";
+import Marketplace from "./Marketplace.jsx";
 import "./App.css";
 
 function ProtectedRoute({ children }) {
