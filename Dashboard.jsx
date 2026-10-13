@@ -10,7 +10,7 @@ import {
   UserRound,
   RefreshCw,
 } from "lucide-react";
-import api from "../services/api";
+import api from "./api.jsx";
 
 export default function Dashboard() {
   const email = localStorage.getItem("email") || "";
