@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, Save, UserRound } from "lucide-react";
-import api from "../services/api";
+import api from "./api.jsx";
 
 export default function Profile() {
   const navigate = useNavigate();
