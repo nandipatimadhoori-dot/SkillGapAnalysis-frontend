@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Store, RefreshCw } from "lucide-react";
-import api from "../services/api";
+import api from "./api.jsx";
 
 export default function Marketplace() {
   const [projects, setProjects] = useState([]);
