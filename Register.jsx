@@ -1,10 +1,8 @@
 
-// File: frontend/src/pages/Register.jsx
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
-import api from "./api.jsx";
+import api from "../services/api";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -57,39 +55,45 @@ export default function Register() {
         role: "STUDENT",
       });
 
-      console.log("Registration response:", response.data);
+      console.log("Registration successful:", response.data);
 
-      setSuccess("Account created successfully! Redirecting to login...");
+      setSuccess(
+        "Account created successfully! Redirecting to login..."
+      );
 
       setTimeout(() => {
         navigate("/login", { replace: true });
       }, 1000);
     } catch (err) {
       console.error("Registration error:", {
+        message: err.message,
         status: err.response?.status,
         data: err.response?.data,
       });
 
+      const status = err.response?.status;
       const data = err.response?.data;
 
-      if (err.response?.status === 400) {
+      if (!err.response) {
+        setError(
+          "Unable to reach the backend. Please check your internet connection or try again in a moment."
+        );
+      } else if (status === 400) {
         setError(
           data?.message ||
             data?.error ||
             (typeof data === "string" ? data : null) ||
-            "Registration rejected. Check the backend validation rules."
+            "Registration rejected. Please check your details."
         );
-      } else if (err.response?.status === 409) {
-        setError("This email is already registered. Please sign in.");
-      } else if (!err.response) {
+      } else if (status === 409) {
         setError(
-          "Cannot connect to the backend. Make sure Spring Boot is running on port 8081."
+          "This email may already be registered. Please sign in or try another email."
         );
       } else {
         setError(
           data?.message ||
             data?.error ||
-            "Registration failed. Check the backend console."
+            `Registration failed (HTTP ${status}). Please try again.`
         );
       }
     } finally {
